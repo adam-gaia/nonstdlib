@@ -1,3 +1,8 @@
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+  echo "$0 must be sourced, not executed."
+  exit 2
+fi
+
 # Include guard
 if [[ -n "${__STD_LOG_SOURCED+x}" ]]; then
   __STD_LOG_SOURCED=1
