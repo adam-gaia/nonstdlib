@@ -5,11 +5,11 @@ if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
 fi
 
 # Include guard
-if [[ -n "${__STD_SOURCED+x}" ]]; then
-  __STD_SOURCED=1
+if [[ -n "${__NONSTDLIB_SOURCED+x}" ]]; then
+  __NONSTDLIB_SOURCED=1
 fi
 
-LIB_DIR="$(realpath ./src)"
+__NONSTDLIB_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")/src"
 
 
 function std::echoerr() {
@@ -100,7 +100,7 @@ function use() {
   path="${path//:://}"
 
   # Replace 'std' prefix with path to library
-  path="${path//std/$LIB_DIR}"
+  path="${path//std/$__NONSTDLIB_DIR}"
 
   if [[ -f "${path}.sh" ]]; then
     path="${path}.sh"
