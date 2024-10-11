@@ -3,7 +3,7 @@ pkgs.stdenv.mkDerivation {
   pname = "nonstdlib";
   version = "1.0";
 
-  src = ./.;
+  src = ../.;
 
   buildInputs = [ ];
   installPhase = ''
