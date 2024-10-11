@@ -91,8 +91,6 @@ function use() {
   if [[ -v __IMPORTED_MODULES["${input}"] ]]; then
     std::echoerr "Module ${input} already imported"
     exit "${USAGE_ERROR}"
-  else
-    echo importing "${input}"
   fi
 
   local path="${input}"
