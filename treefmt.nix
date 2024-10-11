@@ -6,8 +6,4 @@
     shellcheck.enable = true;
     shfmt.enable = true;
   };
-
-  settings.formatter = {
-    shellcheck.excludes = [".envrc"];
-  };
 }
