@@ -14,6 +14,5 @@ fi
 function path::relative() {
   local path="$1"
   local rel_to="$2"
-
   realpath --relative-to="${rel_to}" "${path}"
 }

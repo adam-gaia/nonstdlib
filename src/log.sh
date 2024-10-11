@@ -10,11 +10,6 @@ fi
 
 # TODO: then include guards might be broken for the same reason global vars had to be moed to the 'nonstdlib.sh' file
 
-__THIS_FILE="$(realpath "${BASH_SOURCE[0]}")"
-__DIR="$(dirname "${__THIS_FILE}")"
-source "${__DIR}/color.sh"
-
-
 function log::init() {
   local level="${1:-$__DEFAULT_LOG_LEVEL}"
   format="${2:-$__DEFAULT_LOG_FORMAT}"
@@ -64,11 +59,11 @@ function _log() {
   local numeric_current_level="${__LOG_LEVELS[$level]}"
   local numeric_min_level="${__LOG_LEVELS[$__LOG_LEVEL]}"
   if [[ $numeric_current_level -ge $numeric_min_level ]]; then
-    if [ -z ${NO_COLOR+x} ]; then
-     std::echoerr -e "${color}${STD_COLOR_BOLD}${prefix}${STD_COLOR_NORMAL}${STD_COLOR_NC} ${message}"
-    else
-      std::echoerr "${prefix} ${message}"
-    fi
+    
+      local formatted_prefix
+      formatted_prefix="$(__color_string "${color}" "${STD_FORMAT_BOLD}" "${prefix}")"
+      std::echoerr -e "${formatted_prefix} ${message}"
+
   fi
 }
 

@@ -82,6 +82,62 @@ __LOG_LEVEL="${__DEFAULT_LOG_LEVEL}"
 
 
 
+STD_COLOR_RED='\033[0;31m'
+STD_COLOR_GREEN='\033[0;32m'
+STD_COLOR_YELLOW='\033[0;33m'
+STD_COLOR_BLUE='\033[0;34m'
+STD_COLOR_CYAN='\033[0;36m'
+STD_COLOR_NC='\033[0m' # No Color
+# Store all color options
+declare -A __COLORS=(
+  ["RED"]="${STD_COLOR_RED}"
+  ["GREEN"]="${STD_COLOR_GREEN}"
+  ["YELLOW"]="${STD_COLOR_YELLOW}"
+  ["BLUE"]="${STD_COLOR_BLUE}"
+  ["CYAN"]="${STD_COLOR_CYAN}"
+  ["NO_COLOR"]="${STD_COLOR_NC}"
+)
+declare -r __COLORS
+
+
+STD_FORMAT_BOLD='\033[1m'
+STD_FORMAT_NORMAL='\033[0m' # Not bold
+# Store all formatting options
+declare -A __FORMATS=(
+  ["BOLD"]="${STD_FORMAT_BOLD}"
+  ["NORMAL"]="${STD_FORMAT_NORMAL}"
+)
+declare -r __FORMATS
+
+
+# Apply color+format to a string
+function __color_string() {
+  local color="$1"
+  local format="$2"
+  local string="$3"
+
+    if [ -z ${NO_COLOR+x} ]; then
+      echo -e "${color}${format}${string}${STD_FORMAT_NORMAL}${STD_COLOR_NC}"
+    else
+      # Do not allow any colors
+      echo "${string}"
+    fi
+}
+
+# Settings set by 'status::init' functions
+__STATUS_PREFIX='> '
+__STATUS_FORMAT="${STD_FORMAT_BOLD}"
+__STATUS_COLOR="${STD_COLOR_NC}"
+__SUBSTATUS_INDENT='  '
+__SUBSTATUS_PREFIX='- '
+__SUBSTATUS_FORMAT="${STD_FORMAT_NORMAL}"
+__SUBSTATUS_COLOR="${STD_COLOR_NC}"
+__SEPARATOR_CHAR='='
+__SEPARATOR_FORMAT="${STD_FORMAT_NORMAL}"
+__SEPARATOR_COLOR="${STD_COLOR_NC}"
+__SEPARATOR_LENGTH=0
+
+
 # Associative array to hold modules imported by the 'use' function
 declare -A __IMPORTED_MODULES
 
