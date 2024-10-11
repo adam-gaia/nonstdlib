@@ -15,6 +15,7 @@ function log::init() {
   format="${2:-$__DEFAULT_LOG_FORMAT}"
 
   # TODO: do something with $format
+  # TODO: timestamp?
 
   if [[ -n __LOG_LEVELS[$level] ]]; then
     __LOG_LEVEL="${level}"

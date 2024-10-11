@@ -16,3 +16,17 @@ function path::relative() {
   local rel_to="$2"
   realpath --relative-to="${rel_to}" "${path}"
 }
+
+# Return the paths of all bins in ${PATH} with the given name
+# Like zsh's 'whereis' function
+function path::where() {
+  local name="$1"
+  IFS=':' read -ra paths <<< "${PATH}"
+  for path in "${paths[@]}"; do
+    local full_path="${path}/${name}"
+    if [[ -f "${full_path}" ]]; then
+      echo "${full_path}"
+    fi
+  done
+
+}
