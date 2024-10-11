@@ -28,5 +28,4 @@ function path::where() {
       echo "${full_path}"
     fi
   done
-
 }

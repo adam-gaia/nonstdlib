@@ -4,3 +4,4 @@
 - tests
 - I use corutils in some functions. Either make 100% bash or add as dep in nix package and note in README.md
 - Lots of common bolilerplate. Maybe we need codegen?
+- add 'assert' function to wrap 'test'?

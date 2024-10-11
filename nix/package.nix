@@ -1,11 +1,11 @@
-{pkgs, perSystem, ...}:
+{pkgs, ...}:
 pkgs.stdenv.mkDerivation {
   pname = "nonstdlib";
   version = "1.0";
 
   src = ../.;
 
-  buildInputs = [ ];
+  buildInputs = [];
   installPhase = ''
     mkdir -p $out/share
     cp $src/nonstdlib.sh $out/share/nonstdlib.sh
